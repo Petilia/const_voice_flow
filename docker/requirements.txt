@@ -1,0 +1,4 @@
+# pyaudio
+wave
+soundfile
+numpy
