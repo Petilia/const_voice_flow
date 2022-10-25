@@ -23,8 +23,6 @@ if __name__ == "__main__":
     ogg_name = "ogg_file.ogg"
     wav_name = "wav_file.wav"
 
-    const_ogg_name = "ogg_file1.ogg"
-
     while True:
         ###listen micro
         listen_n_seconds(wav_name, input_device_index=index_device)
@@ -32,6 +30,4 @@ if __name__ == "__main__":
         sf.write(ogg_name, data, samplerate)
         asr_result = asr_from_yandex_speeckit(ogg_name, FOLDER_ID, API_KEY)
         print(asr_result)
-        # asr_result = asr_from_yandex_speeckit(const_ogg_name, FOLDER_ID, API_KEY)
-        # print("sdsds")
         
