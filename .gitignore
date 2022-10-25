@@ -1,0 +1,5 @@
+__pycache__
+*.ogg
+*.wav
+
+# py_files/ogg_file.ogg
