@@ -8,7 +8,7 @@ cd docker
 ./start.sh  
 
 # Внутри контейнера:  
-Вывести список подключенных устройств - среди них должен быть Plantronics Callisto:  
-python py_files/check_devices.py 
+Вывести список подключенных устройств - среди них должен быть Plantronics Callisto: 
+python py_files/check_devices.py   
 Запуск прослушки/распознавания/запросов в dream:  
 python py_files/listener.py 
