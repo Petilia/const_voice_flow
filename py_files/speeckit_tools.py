@@ -1,12 +1,16 @@
 import urllib
 import urllib.request
 import json
+import requests
+import os
+import soundfile as sf
 
-import pyaudio
-import wave
-
-def asr_from_yandex_speeckit(audiofile_name, FOLDER_ID, API_KEY, language="ru-RU"):
+def asr_from_yandex_speeckit(FOLDER_ID, API_KEY, 
+                                language="ru-RU", base_folder="/home/appuser/py_files/",
+                                audiofile_name="heard_file.ogg" ):
     
+    audiofile_name = os.path.join(base_folder, audiofile_name)
+
     with open(audiofile_name, "rb") as f:
         data = f.read()
 
@@ -31,32 +35,38 @@ def asr_from_yandex_speeckit(audiofile_name, FOLDER_ID, API_KEY, language="ru-RU
     return asr_result
 
 
-def listen_n_seconds(filename, input_device_index=11, chunk=1024, 
-                            sample_format=pyaudio.paInt16, channels=1, 
-                            rate=16000, seconds=3):
+def synthesize(folder_id, api_key, text):
+    url = 'https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize'
+    headers = {
+        'Authorization': 'Api-Key ' + api_key,
+    }
 
-    p = pyaudio.PyAudio() # Создать интерфейс для PortAudio
-    
-    stream = p.open(format=sample_format,
-            channels=channels,
-            rate=rate,
-            frames_per_buffer=chunk,
-            input_device_index=input_device_index, # индекс устройства с которого будет идти запись звука 
-            input=True)
+    data = {
+        'text': text,
+        'lang': 'ru-RU',
+        'voice': 'filipp',
+        'folderId': folder_id
+    }
 
-    frames = [] 
+    with requests.post(url, headers=headers, data=data, stream=True) as resp:
+        # print("request posted")
+        if resp.status_code != 200:
+            raise RuntimeError("Invalid response received: code: %d, message: %s" % (resp.status_code, resp.text))
 
-    for i in range(0, int(rate / chunk * seconds)):
-        data = stream.read(chunk, exception_on_overflow = False)
-        frames.append(data)
+        
+        for chunk in resp.iter_content(chunk_size=None):
+            # print("chunk returned")
+            yield chunk
+            
 
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
+def tts_from_yandex_speechkit(text, FOLDER_ID, API_KEY, tts_ogg_name="tts_result.ogg", base_folder="/home/appuser/py_files/"):
 
-    wf = wave.open(filename, 'wb')
-    wf.setnchannels(channels)
-    wf.setsampwidth(p.get_sample_size(sample_format))
-    wf.setframerate(rate)
-    wf.writeframes(b''.join(frames))
-    wf.close()
+    tts_ogg_name = os.path.join(base_folder, tts_ogg_name)
+    tts_wav_name = tts_ogg_name[0:-4] + ".wav"
+
+    with open(tts_ogg_name, "wb") as f:
+        for audio_content in synthesize(FOLDER_ID, API_KEY, text):
+            f.write(audio_content)
+
+    data, samplerate = sf.read(tts_ogg_name)
+    sf.write(tts_wav_name, data, samplerate)
