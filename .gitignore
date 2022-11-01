@@ -3,4 +3,3 @@ __pycache__
 *.wav
 
 # py_files/ogg_file.ogg
-py_files/__pycache__/speeckit_tools.cpython-38.pyc
