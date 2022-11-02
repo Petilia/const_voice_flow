@@ -1,9 +1,4 @@
-import soundfile as sf
-import time
 import sys
-import pyaudio
-import requests
-print(sys.version)
 
 from speeckit_tools import asr_from_yandex_speeckit
 from pyaudio_tools import listen_n_seconds, play_audio, get_device_index
