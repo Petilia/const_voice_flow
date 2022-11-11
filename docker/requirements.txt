@@ -2,3 +2,7 @@
 wave
 soundfile
 numpy
+requests
+scipy
+pyaudioconvert 
+scikit-learn

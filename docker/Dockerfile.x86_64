@@ -22,8 +22,9 @@ RUN apt-get update \
 COPY . .
 
 RUN pip3 install -r requirements.txt
-RUN pip3 install requests
-RUN pip3 install scipy pyaudioconvert 
+# RUN pip3 install requests
+# RUN pip3 install scipy pyaudioconvert 
+# RUN pip3 install scikit-learn
 # RUN pip3 install pydub
 # RUN pip3 install playsound pygobject
 # RUN pip3 install pycairo PyGObject playsound
