@@ -2,7 +2,7 @@ import sys
 
 from speeckit_tools import asr_from_yandex_speeckit
 from pyaudio_tools import listen_n_seconds, play_audio, get_device_index
-
+import requests
 # Определяем, под каким индексом наш микрофон
 index_device = get_device_index()
 
@@ -25,9 +25,10 @@ if __name__ == "__main__":
         print(asr_result)
 
         # request to dream agent
-        # cur_request = {"user_id":"xyz","payload":asr_result}
-        # r = requests.post(url=agent_url, json=cur_request)
+        cur_request = {"user_id":"xyz","payload":asr_result}
+        r = requests.post(url=agent_url, json=cur_request)
         # print('Request - ', cur_request['payload'], '\n', 'Response - ', r.json()['response'])
+        print('3 seconds')
         
        
         

@@ -5,7 +5,7 @@ import soundfile as sf
 
 def listen_n_seconds(input_device_index, filename="heard_file.wav", base_folder="/home/appuser/py_files/",
                         chunk=1024, sample_format=pyaudio.paInt16, channels=1, 
-                            rate=16000, seconds=3, convert_to_ogg=True):
+                            rate=16000, seconds=5, convert_to_ogg=True, return_ogg_name=False):
 
     filename = os.path.join(base_folder, filename)
 
@@ -40,6 +40,9 @@ def listen_n_seconds(input_device_index, filename="heard_file.wav", base_folder=
         data, samplerate = sf.read(filename)
         ogg_name = filename[0:-4] + ".ogg"
         sf.write(ogg_name, data, samplerate)
+
+    if return_ogg_name:
+        return ogg_name
 
 
 def play_audio(filename, output_device_index, base_folder="/home/appuser/py_files/", chunk=1024, 
