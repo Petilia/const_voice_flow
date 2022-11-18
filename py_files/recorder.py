@@ -11,7 +11,8 @@ index_device = get_device_index()
 
 # exp = "noise"
 # exp = "road_voice"
-exp = "temp"
+# exp = "temp"
+exp = "clear_voice"
 folder = "/home/appuser/py_files/records"
 
 base_folder = os.path.join(folder, exp)
@@ -25,7 +26,7 @@ if not os.path.isdir(base_folder):
     os.mkdir(base_folder)
     print("mkdir base_folder")
 
-save_asr_result = True
+save_asr_result = False
 if save_asr_result:
     pickle_path = os.path.join(base_folder, 'asr_results.pickle')
     asr_results = {}
