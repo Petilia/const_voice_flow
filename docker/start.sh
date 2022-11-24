@@ -33,11 +33,13 @@ desktop_start() {
         --device /dev/snd \
         --group-add=audio \
         -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-        -v $workspace_dir/../py_files/:/home/appuser/py_files:rw \
+        -v $workspace_dir/../:/home/appuser/catkin_ws/src/asr_ros1:rw \
         ${ARCH}/const_voice_flow:latest
     xhost -
 }
 
+# -v $workspace_dir/../py_files/:/home/appuser/py_files:rw \
+# -v $workspace_dir/../asr_ros1/:/home/appuser/catkin_ws/src/asr_ros1:rw \
 # --device /dev/snd:/dev/snd \
 # --env ALSA_CARD=Generic \
 
