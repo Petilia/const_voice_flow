@@ -68,5 +68,7 @@ def tts_from_yandex_speechkit(text, FOLDER_ID, API_KEY, tts_ogg_name="tts_result
         for audio_content in synthesize(FOLDER_ID, API_KEY, text):
             f.write(audio_content)
 
-    data, samplerate = sf.read(tts_ogg_name)
-    sf.write(tts_wav_name, data, samplerate)
+    os.system(f"ffmpeg -i {tts_ogg_name} -ar 48000 {tts_wav_name}")
+
+    # data, samplerate = sf.read(tts_ogg_name)
+    # sf.write(tts_wav_name, data, samplerate)
