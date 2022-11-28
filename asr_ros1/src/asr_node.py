@@ -23,9 +23,10 @@ def create_random_image():
         asr_result = asr_result.lower()
         is_go = re.search("поехали|проехали", asr_result)
         if is_go:
-            msg.data = "поехали"
+            # msg.data = "поехали"
+            msg.data = "go"
         else:
-            msg.data = "стоим"
+            msg.data = "no"
 
         print(f"result_asr = {asr_result}; to_topic = {msg.data}")
         pub_asr.publish(msg)

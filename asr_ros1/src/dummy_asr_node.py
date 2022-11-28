@@ -12,6 +12,8 @@ def create_random_image():
         msg.data = "hello world"
         print(msg.data)
         pub_asr.publish(msg)
+
+        # pub_asr.publish("hello world")
       
 
 
