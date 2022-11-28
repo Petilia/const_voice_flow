@@ -10,4 +10,4 @@ py_files/records.zip
 py_files/records/temp/asr_results.pickle
 py_files/__pycache__/speeckit_tools.cpython-38.pyc
 py_files/__pycache__/speeckit_tools.cpython-38.pyc
-docker-compose.yml
+

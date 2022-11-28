@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  tts:
+    build: docker
+    command: python3 ./py_files/app.py
+    network_mode: "host"
+    volumes:
+      - ./py_files:/home/appuser/py_files
+    devices:
+      - "/dev/snd"
+    group_add:
+        - audio
+   
+ 
