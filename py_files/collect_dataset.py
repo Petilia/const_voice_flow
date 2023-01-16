@@ -3,10 +3,13 @@ import wave
 import os
 import soundfile as sf
 from pyaudio_tools import get_device_index
-    
-base_folder = "asr_dataset/"
-speaker_folder = "petryashin/"
-exp = "simple_comands.wav"
+
+base_folder = "/home/appuser/py_files/asr_dataset/"
+speaker_folder = "kichik1/"
+# exp = "simple_comands.wav"
+exp = "texts.wav"
+
+
 filename = os.path.join(base_folder, speaker_folder, exp) 
 
 if not os.path.isdir(base_folder):
